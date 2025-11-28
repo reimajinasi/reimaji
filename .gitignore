@@ -6,6 +6,13 @@ node_modules/
 .env*
 !.env.example
 knowledge-base/env.txt
+.claude/
+agent-os/
+knowledge-base/
+AGENTS.md
+onboarding.md
+CLAUDE.md
+README-DEVELOPMENT.md
 
 coverage/
 playwright-report/
