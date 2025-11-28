@@ -1,3 +1,4 @@
+// Next.js 16: middleware.ts diganti menjadi proxy.ts untuk proteksi rute global
 import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 
 const isPublicRoute = createRouteMatcher(['/', '/sign-in(.*)', '/sign-up(.*)'])

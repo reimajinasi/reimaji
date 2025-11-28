@@ -7,12 +7,16 @@ node_modules/
 !.env.example
 knowledge-base/env.txt
 .claude/
+.trae/
 agent-os/
 knowledge-base/
 AGENTS.md
 onboarding.md
 CLAUDE.md
 README-DEVELOPMENT.md
+
+# TS build info
+tsconfig.tsbuildinfo
 
 coverage/
 playwright-report/
