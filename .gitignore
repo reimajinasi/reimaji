@@ -5,6 +5,7 @@ node_modules/
 
 .env*
 !.env.example
+knowledge-base/env.txt
 
 coverage/
 playwright-report/
