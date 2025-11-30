@@ -8,7 +8,13 @@ export const create = mutation({
     email: v.optional(v.string()),
     firstName: v.optional(v.string()),
     lastName: v.optional(v.string()),
-    role: v.union(v.literal('guest'), v.literal('free'), v.literal('pro'), v.literal('admin'), v.literal('superadmin')),
+    role: v.union(
+      v.literal('guest'),
+      v.literal('free'),
+      v.literal('pro'),
+      v.literal('admin'),
+      v.literal('superadmin')
+    ),
   },
   handler: async (ctx, args) => {
     const now = Date.now()
@@ -26,8 +32,10 @@ export const getByClerkId = query({
   handler: async (ctx, args) => {
     const user = await ctx.db
       .query('users')
-      .filter(q => q.eq(q.field('clerkUserId'), args.clerkUserId))
+      .withIndex('by_clerkUserId', (q) => q.eq('clerkUserId', args.clerkUserId))
       .first()
+
+    if (user?.deletedAt) return null
     return user
   },
 })
@@ -59,17 +67,20 @@ export const upsertFromClerk = mutation({
 
     const existing = await ctx.db
       .query('users')
-      .filter(q => q.eq(q.field('clerkUserId'), args.clerkUserId))
+      .withIndex('by_clerkUserId', (q) => q.eq('clerkUserId', args.clerkUserId))
       .first()
 
     const now = Date.now()
     if (existing) {
+      // If user was soft-deleted, we might want to reactivate or keep it deleted.
+      // For now, let's assume login reactivates the account if it was deleted.
       await ctx.db.patch(existing._id, {
         email: args.email ?? existing.email,
         firstName: args.firstName ?? existing.firstName,
         lastName: args.lastName ?? existing.lastName,
         role: mappedRole ?? existing.role,
         updatedAt: now,
+        deletedAt: undefined, // Reactivate account on login
       })
       return existing._id
     }
@@ -91,7 +102,10 @@ export const listAll = query({
   args: { clerkUserId: v.string() },
   handler: async (ctx, args) => {
     await ensureRole(ctx, args.clerkUserId, ['admin', 'superadmin'])
-    const users = await ctx.db.query('users').collect()
+    const users = await ctx.db
+      .query('users')
+      .filter((q) => q.eq(q.field('deletedAt'), undefined))
+      .collect()
     return users
   },
 })
@@ -119,10 +133,34 @@ export const roleStats = query({
   args: { clerkUserId: v.string() },
   handler: async (ctx, args) => {
     await ensureRole(ctx, args.clerkUserId, ['admin', 'superadmin'])
-    const users = await ctx.db.query('users').collect()
+    const users = await ctx.db
+      .query('users')
+      .filter((q) => q.eq(q.field('deletedAt'), undefined))
+      .collect()
+
     const counts: Record<string, number> = { guest: 0, free: 0, pro: 0, admin: 0, superadmin: 0 }
     for (const u of users) counts[u.role] = (counts[u.role] ?? 0) + 1
     const total = users.length
     return { total, counts }
+  },
+})
+
+export const deleteAccount = mutation({
+  args: {},
+  handler: async (ctx) => {
+    const identity = await ctx.auth.getUserIdentity()
+    if (!identity) throw new Error('Unauthenticated')
+
+    const user = await ctx.db
+      .query('users')
+      .withIndex('by_clerkUserId', (q) => q.eq('clerkUserId', identity.subject))
+      .first()
+
+    if (!user) throw new Error('User not found')
+
+    await ctx.db.patch(user._id, {
+      updatedAt: Date.now(),
+      deletedAt: Date.now(),
+    })
   },
 })

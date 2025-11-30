@@ -1,26 +1,30 @@
 # Onboarding & Progress Tracker – Reimaji
 
 ## Tujuan
+
 - Menjadi penanda/catatan progres dari setiap step/block development.
 - Memudahkan sinkron tim saat eksekusi fase dan blok kerja.
 
 ## Cara Pakai
+
 - Centang checklist saat selesai; tambahkan catatan singkat hasil/risiko.
 - Isi Log Progres setiap ada perubahan penting (tanggal, siapa, hasil).
 - Jaga konsistensi dengan `tasks.md` dan arsitektur di folder `agent-os/specs/...`.
 
 ## Status Ringkas
+
 - Owner: Erik
 - Target MVP: 20 minggu
 - Goal bisnis: 50 paid users (6–12 bulan)
 
 ## Phase Checklist (MVP)
+
 - [x] 0.1 Initialize Next.js 16 + App Router
 - [x] 0.2 Setup Convex project & schema files
 - [x] 0.3 Implement Clerk authentication (pages + middleware)
 - [x] 0.4 Configure Vercel deployment (env + preview)
 - [x] 0.5 Konfigurasi integrasi (Xendit, Resend, Vercel AI SDK)
- - [x] 0.6 Routing skeleton `(public)/(app)/admin` + navigasi
+- [x] 0.6 Routing skeleton `(public)/(app)/admin` + navigasi
 - [ ] 0.5 Konfigurasi integrasi (Xendit, Resend, Vercel AI SDK)
 - [ ] 0.6 Routing skeleton `(public)/(app)/admin`
 - [x] 0.7 Design system foundations (shadcn/ui + Tailwind)
@@ -40,6 +44,7 @@
 - [ ] 1.14 Landing page (hero, value prop, CTA)
 
 ## Block Development (High-level)
+
 - [x] BLOCK_1 – Authentication Foundation
   - Clerk integration, protected routes, user profile, role management
 - [ ] BLOCK_2 – Content Management
@@ -48,6 +53,7 @@
   - Course structure, video player, progress, quiz
 
 ## Teknis Kritis (Checklist)
+
 - [ ] Env: `.env.local` diisi dari `knowledge-base/env.txt`, jangan commit
 - [ ] TypeScript target `es2020`, lint + type-check hijau
 - [ ] Webhook Xendit: Node runtime + HMAC `x-xendit-signature`
@@ -55,6 +61,7 @@
 - [ ] Design system tokens + aksesibilitas dipatuhi
 
 ## Log Progres
+
 - [x] [2025-11-29] Step: 0.1 Initialize Next.js 16 + App Router (root)
   - Hasil: Type-check, lint, build OK; struktur `src/app` di root; Husky pre-commit aktif; Tailwind v4 via PostCSS
   - Risiko/Follow-up: tsconfig target saat ini `ES2017` (rencana upgrade ke `es2020` sesuai standar); lanjut 0.2 Convex setup
@@ -64,6 +71,7 @@
   - Risiko/Follow-up: Setelah `_generated` tersedia, hapus exclude `convex/**` dari `tsconfig.json`; lanjut fungsi dasar untuk `news/research`
 
 ## Referensi Cepat
+
 - `agent-os/specs/2025-11-28-reimaji-ai-literacy-platform/planning/01–05*.md` (arsitektur & standar)
 - `tasks.md` (roadmap 98 tugas, critical path)
 - `DESIGN-SYSTEM-QUICK-REFERENCE.md` (token & pola UI)
@@ -150,9 +158,9 @@
   - Risiko/Follow-up: Tambah editor soal di admin.
 
 - [x] [2025-11-30] Step: 1.9 Implement certificate system
-153→  - Hasil: Halaman `/lms/[course]/certificate` siap cetak PDF (print-to-PDF); gating progres dapat ditambahkan kemudian.
-154→  - Bukti: `type-check`, `lint`, `build` OK; route certificate terdeteksi.
-155→  - Risiko/Follow-up: Tambah validasi progres penuh sebelum akses sertifikat.
+      153→ - Hasil: Halaman `/lms/[course]/certificate` siap cetak PDF (print-to-PDF); gating progres dapat ditambahkan kemudian.
+      154→ - Bukti: `type-check`, `lint`, `build` OK; route certificate terdeteksi.
+      155→ - Risiko/Follow-up: Tambah validasi progres penuh sebelum akses sertifikat.
 
 - [x] [2025-11-30] Step: 1.14 Create Landing Page
   - Hasil: Landing difokuskan pada Berita, Review Produk & Unggulan, dan Riset terbaru; hero dengan value prop dan CTA `Daftar`; LMS ditampilkan sebagai teaser ke halaman khusus.
@@ -163,9 +171,9 @@
   - Hasil: Dokumen implementasi lengkap dibuat (`implementation/1.1-complete-user-authentication-flow.md`) mencakup registration, email verification, dashboard, profile management, dan password reset. Include acceptance criteria, langkah implementasi, testing strategy, dan risk mitigation.
   - Risiko/Follow-up: Implementasi kode perlu segera dilakukan; pastikan Clerk webhook untuk email verification diconfigurasi dengan benar; test payment integration untuk Pro features.
 
- - [x] [2025-11-29] Task 1.2: Implement User Role Management
-  - Hasil: Dokumen implementasi lengkap dibuat (`implementation/1.2-implement-user-role-management.md`) mencakup admin panel, role upgrade flow, session management, dan security measures. Include RBAC architecture, Xendit integration, dan comprehensive testing plan.
-  - Risiko/Follow-up: Implementasi Convex schema update untuk roles dan sessions; pastikan admin role checking di semua admin routes; test subscription webhook dari Xendit.
+- [x] [2025-11-29] Task 1.2: Implement User Role Management
+- Hasil: Dokumen implementasi lengkap dibuat (`implementation/1.2-implement-user-role-management.md`) mencakup admin panel, role upgrade flow, session management, dan security measures. Include RBAC architecture, Xendit integration, dan comprehensive testing plan.
+- Risiko/Follow-up: Implementasi Convex schema update untuk roles dan sessions; pastikan admin role checking di semua admin routes; test subscription webhook dari Xendit.
 
 - [x] [2025-11-30] Step: 0.11 Set up testing framework
   - Hasil: Jest + Testing Library dikonfigurasi; `jest.config.ts` dan `jest.setup.ts` dibuat; contoh test untuk `Button` lulus; util testing Convex dan seeds data ditambahkan; Playwright dikonfigurasi dengan tes E2E dasar untuk halaman Home.
@@ -175,7 +183,7 @@
 - [x] [2025-11-30] Step: 0.12 Configure CI/CD pipeline
   - Hasil: Workflow CI (`ci.yml`) untuk lint, type-check, build, dan test ditambahkan; workflow deploy Vercel (`deploy.yml`) dibuat bersyarat secrets.
   - Bukti: Pipeline siap berjalan pada push/PR ke `main`; deploy otomatis aktif saat secrets diisi.
-178→  - Risiko/Follow-up: Isi secrets Vercel di repository settings agar deploy otomatis aktif.
+    178→ - Risiko/Follow-up: Isi secrets Vercel di repository settings agar deploy otomatis aktif.
 
 - [x] [2025-11-30] Step: 2.1 Establish content creation workflow
   - Hasil: Template konten News/Research ditambahkan; halaman admin Workflow untuk publish/unpublish dibuat dan terintegrasi RBAC via Clerk.
@@ -203,3 +211,28 @@
   - Hasil: Meta tags lengkap (Open Graph, Twitter), JSON-LD di Home/News/Research, robots dan sitemap aktif.
   - Bukti: `src/app/layout.tsx`, `src/app/robots.ts`, `src/app/sitemap.ts`, `public/robots.txt`, update JSON-LD di halaman.
   - Risiko/Follow-up: Tambah og:image dan canonical per halaman saat konten final.
+
+- [x] [2025-11-30] Step: 3.1 Optimize application performance
+  - Hasil: Optimasi query Convex (index `by_isPublished`) di News/Research/Courses; implementasi caching `unstable_cache` di halaman publik; monitoring performa dasar via `page_views` table.
+  - Bukti: `convex/news.ts`, `convex/research.ts`, `convex/courses.ts`, `src/app/(public)/news/page.tsx`, `src/app/(public)/research/page.tsx`, `src/app/(app)/lms/page.tsx`, `src/components/performance-monitor.tsx`.
+  - Risiko/Follow-up: Monitor `page_views` untuk memastikan data masuk; pertimbangkan monitoring LCP/CLS lebih detail dengan layanan eksternal jika perlu.
+
+- [x] [2025-11-30] Step: 3.2 Set up analytics and monitoring
+  - Hasil: Implementasi `trackUserAction` dan `trackConversion` di backend; hook `useTrackAction` untuk frontend; Dashboard KPI sederhana di `/admin/kpi`.
+  - Bukti: `convex/analytics.ts`, `src/hooks/use-track-action.ts`, `src/app/admin/kpi/page.tsx`.
+  - Risiko/Follow-up: Integrasikan `useTrackAction` ke komponen tombol (SignUp, Lesson Complete) secara bertahap.
+
+- [x] [2025-11-30] Step: 3.3 Enhance security and compliance
+  - Hasil: Audit keamanan (`docs/security-audit.md`), dokumentasi backup (`docs/backup-recovery.md`), fitur Hapus Akun (soft-delete) di Profile page.
+  - Bukti: `convex/users.ts`, `src/app/(app)/profile/page.tsx`, `docs/security-audit.md`, `docs/backup-recovery.md`.
+  - Risiko/Follow-up: Implementasi hard-delete atau anonymization script untuk kepatuhan penuh GDPR jika diperlukan nanti.
+
+- [x] [2025-11-30] Step: 3.4 Remediation: Security and Analytics
+  - Hasil: Fix IDOR di `deleteAccount` (cek identity); filter user soft-deleted di query; integrasi `NewsTracker` untuk analytics; update `PerformanceMonitor` pakai `useReportWebVitals`.
+  - Bukti: `convex/users.ts`, `src/components/performance-monitor.tsx`, `src/components/features/news-tracker.tsx`, `src/app/(public)/news/[slug]/page.tsx`.
+  - Risiko/Follow-up: Pastikan `user_actions` tidak membanjiri DB dengan data Web Vitals (sampling mungkin diperlukan nanti).
+
+- [x] [2025-11-30] Step: 3.5 Refinement: Security and Analytics
+  - Hasil: Refactor `deleteAccount` (hapus argumen); optimasi query user (Convex filter `deletedAt`); integrasi `DashboardTracker` dan `LessonTracker`.
+  - Bukti: `convex/users.ts`, `src/app/(app)/profile/page.tsx`, `src/app/(app)/dashboard/page.tsx`, `src/app/(app)/lms/[course]/[module]/[lesson]/page.tsx`.
+  - Risiko/Follow-up: Monitor performa query user dengan filter baru.

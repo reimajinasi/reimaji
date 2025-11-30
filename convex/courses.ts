@@ -7,8 +7,8 @@ export const list = query({
   handler: async (ctx) => {
     const items = await ctx.db
       .query('courses')
-      .filter(q => q.eq(q.field('isPublished'), true))
-      .filter(q => q.eq(q.field('deletedAt'), undefined))
+      .withIndex('by_isPublished', (q) => q.eq('isPublished', true))
+      .filter((q) => q.eq(q.field('deletedAt'), undefined))
       .collect()
     items.sort((a, b) => (b.publishedAt ?? 0) - (a.publishedAt ?? 0))
     return items
@@ -20,7 +20,7 @@ export const getBySlug = query({
   handler: async (ctx, args) => {
     const item = await ctx.db
       .query('courses')
-      .filter(q => q.eq(q.field('slug'), args.slug))
+      .filter((q) => q.eq(q.field('slug'), args.slug))
       .first()
     if (!item || item.deletedAt) return null
     return item

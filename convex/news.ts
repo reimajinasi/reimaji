@@ -13,17 +13,17 @@ export const list = query({
   handler: async (ctx, args) => {
     let q = ctx.db
       .query('news')
-      .filter(q => q.eq(q.field('isPublished'), true))
-      .filter(q => q.eq(q.field('deletedAt'), undefined))
+      .withIndex('by_isPublished', (q) => q.eq('isPublished', true))
+      .filter((q) => q.eq(q.field('deletedAt'), undefined))
 
-    if (args.type) q = q.filter(qr => qr.eq(qr.field('type'), args.type))
+    if (args.type) q = q.filter((qr) => qr.eq(qr.field('type'), args.type))
 
     let results = await q.collect()
-    if (args.tag) results = results.filter(n => (n.tags || []).includes(args.tag!))
+    if (args.tag) results = results.filter((n) => (n.tags || []).includes(args.tag!))
     if (args.q && args.q.trim().length > 0) {
       const text = args.q.toLowerCase()
-      results = results.filter(n =>
-        [n.title, n.summary, n.content].some(vv => vv?.toLowerCase().includes(text))
+      results = results.filter((n) =>
+        [n.title, n.summary, n.content].some((vv) => vv?.toLowerCase().includes(text))
       )
     }
     results.sort((a, b) => (b.publishedAt ?? 0) - (a.publishedAt ?? 0))
@@ -37,7 +37,7 @@ export const listAll = query({
   handler: async (ctx, args) => {
     await ensureRole(ctx, args.clerkUserId, ['admin', 'superadmin'])
     const items = await ctx.db.query('news').collect()
-    return items.filter(n => !n.deletedAt)
+    return items.filter((n) => !n.deletedAt)
   },
 })
 
@@ -46,7 +46,7 @@ export const getBySlug = query({
   handler: async (ctx, args) => {
     const item = await ctx.db
       .query('news')
-      .filter(q => q.eq(q.field('slug'), args.slug))
+      .filter((q) => q.eq(q.field('slug'), args.slug))
       .first()
     if (!item || item.deletedAt) return null
     return item
@@ -147,19 +147,19 @@ export const stats = query({
   handler: async (ctx, args) => {
     await ensureRole(ctx, args.clerkUserId, ['admin', 'superadmin'])
     const items = await ctx.db.query('news').collect()
-    const valid = items.filter(n => !n.deletedAt)
-    const totalPublished = valid.filter(n => n.isPublished).length
+    const valid = items.filter((n) => !n.deletedAt)
+    const totalPublished = valid.filter((n) => n.isPublished).length
     const totalDraft = valid.length - totalPublished
     const tagFreq: Record<string, number> = {}
     for (const n of valid) for (const t of n.tags || []) tagFreq[t] = (tagFreq[t] ?? 0) + 1
     const topTags = Object.entries(tagFreq)
       .sort((a, b) => b[1] - a[1])
-      .slice(0, (args.limitTop ?? 5))
+      .slice(0, args.limitTop ?? 5)
       .map(([tag, count]) => ({ tag, count }))
     const topByViews = [...valid]
       .sort((a, b) => (b.viewCount ?? 0) - (a.viewCount ?? 0))
-      .slice(0, (args.limitTop ?? 5))
-      .map(n => ({ id: n._id, title: n.title, viewCount: n.viewCount }))
+      .slice(0, args.limitTop ?? 5)
+      .map((n) => ({ id: n._id, title: n.title, viewCount: n.viewCount }))
     return { totalPublished, totalDraft, topTags, topByViews }
   },
 })

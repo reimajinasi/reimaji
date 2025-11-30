@@ -1,4 +1,4 @@
-"use client"
+'use client'
 import { useAuth } from '@clerk/nextjs'
 import { useQuery } from 'convex/react'
 import { api } from '../../../../convex/_generated/api'
@@ -14,7 +14,11 @@ export default function AnalyticsPage() {
 
   return (
     <div className='space-y-6'>
-      <PageHeader title='Content Analytics' description='Ringkasan konten: published vs draft, tag teratas, dan view tertinggi.' breadcrumbs={[{ label: 'Admin', href: '/admin' }, { label: 'Analytics' }]} />
+      <PageHeader
+        title='Content Analytics'
+        description='Ringkasan konten: published vs draft, tag teratas, dan view tertinggi.'
+        breadcrumbs={[{ label: 'Admin', href: '/admin' }, { label: 'Analytics' }]}
+      />
 
       <Section>
         <ContentCard title='News' description='Status dan insights'>
@@ -22,7 +26,9 @@ export default function AnalyticsPage() {
             <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
               <div className='p-3 border rounded'>Published: {newsStats.totalPublished}</div>
               <div className='p-3 border rounded'>Draft: {newsStats.totalDraft}</div>
-              <div className='p-3 border rounded'>Top Tags: {newsStats.topTags.map(t => `${t.tag}(${t.count})`).join(', ')}</div>
+              <div className='p-3 border rounded'>
+                Top Tags: {newsStats.topTags.map((t) => `${t.tag}(${t.count})`).join(', ')}
+              </div>
             </div>
           ) : (
             <div className='text-sm text-muted-foreground'>Memuat…</div>
@@ -36,7 +42,9 @@ export default function AnalyticsPage() {
             <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
               <div className='p-3 border rounded'>Published: {researchStats.totalPublished}</div>
               <div className='p-3 border rounded'>Draft: {researchStats.totalDraft}</div>
-              <div className='p-3 border rounded'>Top Tags: {researchStats.topTags.map(t => `${t.tag}(${t.count})`).join(', ')}</div>
+              <div className='p-3 border rounded'>
+                Top Tags: {researchStats.topTags.map((t) => `${t.tag}(${t.count})`).join(', ')}
+              </div>
             </div>
           ) : (
             <div className='text-sm text-muted-foreground'>Memuat…</div>

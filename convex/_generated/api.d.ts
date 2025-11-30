@@ -9,6 +9,7 @@
  */
 
 import type * as achievements from "../achievements.js";
+import type * as analytics from "../analytics.js";
 import type * as bookmarks from "../bookmarks.js";
 import type * as courses from "../courses.js";
 import type * as lessons from "../lessons.js";
@@ -29,6 +30,7 @@ import type {
 
 declare const fullApi: ApiFromModules<{
   achievements: typeof achievements;
+  analytics: typeof analytics;
   bookmarks: typeof bookmarks;
   courses: typeof courses;
   lessons: typeof lessons;

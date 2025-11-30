@@ -9,6 +9,7 @@ import { ContentCard } from '@/components/layout/content-card'
 import { BookmarkButton } from '@/components/features/bookmark-button'
 import React from 'react'
 import sanitizeHtml from 'sanitize-html'
+import { NewsTracker } from '@/components/features/news-tracker'
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const { userId } = await auth()
@@ -24,28 +25,44 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const canAccess = !item.isPremium || ['pro', 'admin', 'superadmin'].includes(role)
 
   return (
-    <div className="space-y-6">
+    <div className='space-y-6'>
       <PageHeader
         title={item.title}
         description={item.summary}
-        breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'News', href: '/news' }, { label: item.title }]}
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'News', href: '/news' },
+          { label: item.title },
+        ]}
         actions={<BookmarkButton kind='news' entityId={item._id as string} />}
       />
+      <NewsTracker slug={item.slug} title={item.title} />
       <Section>
-        <ContentCard title="Konten" description={canAccess ? 'Konten lengkap' : 'Konten terkunci untuk pengguna Premium'}>
+        <ContentCard
+          title='Konten'
+          description={canAccess ? 'Konten lengkap' : 'Konten terkunci untuk pengguna Premium'}
+        >
           {canAccess ? (
-            <div className="prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: sanitizeHtml(item.content) }} />
+            <div
+              className='prose prose-sm max-w-none'
+              dangerouslySetInnerHTML={{ __html: sanitizeHtml(item.content) }}
+            />
           ) : (
-            <div className="space-y-3">
-              <div className="rounded border border-border p-4 text-sm">Konten premium. Silakan upgrade ke Pro untuk akses penuh.</div>
-              <div className="text-sm text-muted-foreground">Ringkasan:</div>
-              <div className="prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: sanitizeHtml(item.summary) }} />
+            <div className='space-y-3'>
+              <div className='rounded border border-border p-4 text-sm'>
+                Konten premium. Silakan upgrade ke Pro untuk akses penuh.
+              </div>
+              <div className='text-sm text-muted-foreground'>Ringkasan:</div>
+              <div
+                className='prose prose-sm max-w-none'
+                dangerouslySetInnerHTML={{ __html: sanitizeHtml(item.summary) }}
+              />
             </div>
           )}
         </ContentCard>
       </Section>
       <script
-        type="application/ld+json"
+        type='application/ld+json'
         suppressHydrationWarning
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({

@@ -21,12 +21,14 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: 'Reimaji – AI Literacy Platform',
-  description: 'Berita AI, review produk unggulan, dan ringkasan riset terbaru untuk pekerja Indonesia.',
+  description:
+    'Berita AI, review produk unggulan, dan ringkasan riset terbaru untuk pekerja Indonesia.',
   keywords: ['AI', 'Artificial Intelligence', 'News', 'Research', 'LMS', 'Indonesia'],
   robots: { index: true, follow: true },
   openGraph: {
     title: 'Reimaji – AI Literacy Platform',
-    description: 'Berita AI, review produk unggulan, dan ringkasan riset terbaru untuk pekerja Indonesia.',
+    description:
+      'Berita AI, review produk unggulan, dan ringkasan riset terbaru untuk pekerja Indonesia.',
     url: process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000',
     siteName: 'Reimaji',
     type: 'website',
@@ -38,6 +40,10 @@ export const metadata: Metadata = {
   },
 }
 
+import { PerformanceMonitor } from '@/components/performance-monitor'
+
+// ... existing imports ...
+
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <ClerkProvider>
@@ -45,14 +51,15 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <head>
           {process.env.NODE_ENV === 'development' && (
             <Script
-              src="//unpkg.com/react-grab/dist/index.global.js"
-              crossOrigin="anonymous"
-              strategy="beforeInteractive"
+              src='//unpkg.com/react-grab/dist/index.global.js'
+              crossOrigin='anonymous'
+              strategy='beforeInteractive'
             />
           )}
         </head>
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
           <ConvexClientProvider>
+            <PerformanceMonitor />
             <AuthHeader />
             <Container>
               <MainNav />

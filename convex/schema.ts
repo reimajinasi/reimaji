@@ -16,6 +16,7 @@ export default defineSchema({
     ),
     createdAt: v.number(),
     updatedAt: v.number(),
+    deletedAt: v.optional(v.number()),
   })
     .index('by_clerkUserId', ['clerkUserId'])
     .index('by_role', ['role']),
@@ -146,18 +147,22 @@ export default defineSchema({
 
   onboarding: defineTable({
     userId: v.id('users'),
-    steps: v.optional(v.object({ news: v.optional(v.boolean()), research: v.optional(v.boolean()), lms: v.optional(v.boolean()) })),
+    steps: v.optional(
+      v.object({
+        news: v.optional(v.boolean()),
+        research: v.optional(v.boolean()),
+        lms: v.optional(v.boolean()),
+      })
+    ),
     updatedAt: v.number(),
-  })
-    .index('by_user', ['userId']),
+  }).index('by_user', ['userId']),
 
   badges: defineTable({
     key: v.string(),
     title: v.string(),
     description: v.string(),
     createdAt: v.number(),
-  })
-    .index('by_key', ['key']),
+  }).index('by_key', ['key']),
 
   user_badges: defineTable({
     userId: v.id('users'),
@@ -166,4 +171,47 @@ export default defineSchema({
   })
     .index('by_user', ['userId'])
     .index('by_badge', ['badgeId']),
+
+  page_views: defineTable({
+    userId: v.optional(v.id('users')),
+    path: v.string(),
+    referrer: v.optional(v.string()),
+    userAgent: v.optional(v.string()),
+    loadTime: v.optional(v.number()),
+    timestamp: v.number(),
+    createdAt: v.number(),
+  })
+    .index('by_user', ['userId'])
+    .index('by_path', ['path'])
+    .index('by_timestamp', ['timestamp']),
+
+  user_actions: defineTable({
+    userId: v.id('users'),
+    action: v.string(),
+    metadata: v.optional(v.object({})),
+    timestamp: v.number(),
+    createdAt: v.number(),
+  })
+    .index('by_user', ['userId'])
+    .index('by_action', ['action'])
+    .index('by_timestamp', ['timestamp']),
+
+  conversions: defineTable({
+    userId: v.id('users'),
+    conversionType: v.union(
+      v.literal('signup'),
+      v.literal('subscription_start'),
+      v.literal('subscription_cancel'),
+      v.literal('course_start'),
+      v.literal('course_complete'),
+      v.literal('content_upgrade')
+    ),
+    value: v.optional(v.number()),
+    metadata: v.optional(v.object({})),
+    timestamp: v.number(),
+    createdAt: v.number(),
+  })
+    .index('by_user', ['userId'])
+    .index('by_conversionType', ['conversionType'])
+    .index('by_timestamp', ['timestamp']),
 })

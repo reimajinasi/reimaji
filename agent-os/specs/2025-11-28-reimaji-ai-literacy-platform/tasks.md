@@ -1,6 +1,7 @@
 # Strategic Task List: Reimaji AI Literacy Platform
 
 ## Overview
+
 Total Tasks: 98 tasks across 4 phases
 Target Launch: 6-12 months
 Goal: 50 paid users within first year
@@ -8,18 +9,22 @@ Goal: 50 paid users within first year
 ## Phase-Based Development Roadmap
 
 ### Phase 0: Foundation & Setup (Tasks 1-20)
+
 **Timeline:** Weeks 1-4
 **Goal:** Development environment and core infrastructure ready
 
 ### Phase 1: Core MVP Features (Tasks 21-60)
+
 **Timeline:** Weeks 5-16
 **Goal:** Functional MVP with core user journey complete
 
 ### Phase 2: Content & Engagement (Tasks 61-85)
+
 **Timeline:** Weeks 17-24
 **Goal:** Rich content experience and user engagement features
 
 ### Phase 3: Scale & Optimization (Tasks 86-98)
+
 **Timeline:** Weeks 25-28+
 **Goal:** Performance optimization and scale preparation
 
@@ -28,6 +33,7 @@ Goal: 50 paid users within first year
 ## Phase 0: Foundation & Setup (Tasks 1-20)
 
 ### Infrastructure & Environment Setup
+
 **Dependencies:** None
 **Critical Path:** Yes
 
@@ -67,6 +73,7 @@ Goal: 50 paid users within first year
   - **Acceptance:** All integrations respond in test mode
 
 ### Core Project Structure
+
 **Dependencies:** Tasks 0.1-0.5
 **Critical Path:** Yes
 
@@ -92,6 +99,7 @@ Goal: 50 paid users within first year
   - **Acceptance:** Team workflow documented and tested
 
 ### Database Schema & Core Models
+
 **Dependencies:** Task 0.2
 **Critical Path:** Yes
 
@@ -110,28 +118,32 @@ Goal: 50 paid users within first year
   - **Acceptance:** Role-based access control working for all user types
 
 ### Testing Infrastructure
+
 **Dependencies:** Tasks 0.1-0.3
 **Critical Path:** No
 
 116→- [x] 0.11 Set up testing framework
-117→  - [x] 0.11.1 Configure Jest/Testing Library for components
-118→  - [x] 0.11.2 Set up Convex testing utilities
-119→  - [x] 0.11.3 Create test data seeds
-  - **Complexity:** Medium
-  - **Acceptance:** Test suite runs, basic tests pass
+117→ - [x] 0.11.1 Configure Jest/Testing Library for components
+118→ - [x] 0.11.2 Set up Convex testing utilities
+119→ - [x] 0.11.3 Create test data seeds
+
+- **Complexity:** Medium
+- **Acceptance:** Test suite runs, basic tests pass
 
 123→- [x] 0.12 Configure CI/CD pipeline
-124→  - [x] 0.12.1 Set up GitHub Actions for automated testing
-125→  - [x] 0.12.2 Configure automated deployments
-126→  - [x] 0.12.3 Set up environment-specific configurations
-  - **Complexity:** Medium
-  - **Acceptance:** Automated tests and deployments working
+124→ - [x] 0.12.1 Set up GitHub Actions for automated testing
+125→ - [x] 0.12.2 Configure automated deployments
+126→ - [x] 0.12.3 Set up environment-specific configurations
+
+- **Complexity:** Medium
+- **Acceptance:** Automated tests and deployments working
 
 ---
 
 ## Phase 1: Core MVP Features (Tasks 21-60)
 
 ### Authentication & User Management (Tasks 21-25)
+
 **Dependencies:** Phase 0 complete
 **Critical Path:** Yes
 
@@ -150,6 +162,7 @@ Goal: 50 paid users within first year
   - **Acceptance:** Role-based access fully functional, admin can manage users
 
 ### Content Management - News & Research (Tasks 26-35)
+
 **Dependencies:** Tasks 1.1-1.2
 **Critical Path:** High
 
@@ -175,6 +188,7 @@ Goal: 50 paid users within first year
   - **Acceptance:** Admins can manage all content, AI assistance working
 
 ### Learning Management System (Tasks 36-45)
+
 **Dependencies:** Tasks 1.3-1.4
 **Critical Path:** High
 
@@ -207,6 +221,7 @@ Goal: 50 paid users within first year
   - **Acceptance:** Certificates generate correctly, downloadable
 
 ### Payment & Monetization (Tasks 46-52)
+
 **Status:** Deferred sampai setelah Landing Page selesai
 **Dependencies:** Tasks 1.2, 1.8
 **Critical Path:** High
@@ -233,6 +248,7 @@ Goal: 50 paid users within first year
   - **Acceptance:** Emails send correctly, content appropriate
 
 ### AI Playground (Tasks 53-56)
+
 **Status:** Deferred sampai setelah Landing Page selesai
 **Dependencies:** Task 0.5
 **Critical Path:** Medium
@@ -247,21 +263,24 @@ Goal: 50 paid users within first year
   - **Acceptance:** Playground functional, educational content helpful
 
 ### Landing Page & Public Content (Tasks 57-60)
+
 **Dependencies:** Tasks 1.3-1.4
 **Critical Path:** Medium
 
 253→- [x] 1.14 Create landing page
-254→  - [x] 1.14.1 Build hero section with value proposition
-255→  - [x] 1.14.2 Add feature highlights and benefits
-256→  - [x] 1.14.3 Include call-to-action for registration
-  - **Complexity:** Medium
-  - **Acceptance:** Landing page compelling, conversion optimized
+254→ - [x] 1.14.1 Build hero section with value proposition
+255→ - [x] 1.14.2 Add feature highlights and benefits
+256→ - [x] 1.14.3 Include call-to-action for registration
+
+- **Complexity:** Medium
+- **Acceptance:** Landing page compelling, conversion optimized
 
 ---
 
 ## Phase 2: Content & Engagement (Tasks 61-85)
 
 ### Content Creation Pipeline (Tasks 61-68)
+
 **Dependencies:** Phase 1 complete
 **Critical Path:** High
 
@@ -280,6 +299,7 @@ Goal: 50 paid users within first year
   - **Acceptance:** Sufficient content for launch, quality high
 
 ### Admin Panel Enhancement (Tasks 69-73)
+
 **Dependencies:** Task 2.1
 **Critical Path:** Medium
 
@@ -291,6 +311,7 @@ Goal: 50 paid users within first year
   - **Acceptance:** Admin tools comprehensive, user-friendly
 
 ### User Experience Improvements (Tasks 74-80)
+
 **Dependencies:** Task 2.2
 **Critical Path:** Medium
 
@@ -309,6 +330,7 @@ Goal: 50 paid users within first year
   - **Acceptance:** Engagement features increase user retention
 
 ### SEO & Performance (Tasks 81-85)
+
 **Dependencies:** Task 2.4
 **Critical Path:** Low
 
@@ -324,43 +346,62 @@ Goal: 50 paid users within first year
 ## Phase 3: Scale & Optimization (Tasks 86-98)
 
 ### Performance Optimization (Tasks 86-90)
+
 **Dependencies:** Phase 2 complete
 **Critical Path:** Medium
 
-- [ ] 3.1 Optimize application performance
-  - [ ] 3.1.1 Implement caching strategies
-  - [ ] 3.1.2 Optimize database queries
-  - [ ] 3.1.3 Add performance monitoring
+- [x] 3.1 Optimize application performance
+  - [x] 3.1.1 Implement caching strategies
+  - [x] 3.1.2 Optimize database queries
+  - [x] 3.1.3 Add performance monitoring
   - **Complexity:** High
   - **Acceptance:** Load times under 2 seconds, monitoring active
 
 ### Analytics & Monitoring (Tasks 91-94)
+
 **Dependencies:** Task 3.1
 **Critical Path:** Low
 
-- [ ] 3.2 Set up analytics and monitoring
-  - [ ] 3.2.1 Implement user behavior analytics
-  - [ ] 3.2.2 Set up conversion tracking
-  - [ ] 3.2.3 Create KPI dashboard
+- [x] 3.2 Set up analytics and monitoring
+  - [x] 3.2.1 Implement user behavior analytics
+  - [x] 3.2.2 Set up conversion tracking
+  - [x] 3.2.3 Create KPI dashboard
   - **Complexity:** Medium
   - **Acceptance:** Analytics comprehensive, KPIs tracked
 
 ### Security & Compliance (Tasks 95-98)
+
 **Dependencies:** Task 3.2
 **Critical Path:** High
 
-- [ ] 3.3 Enhance security and compliance
-  - [ ] 3.3.1 Conduct security audit
-  - [ ] 3.3.2 Implement data privacy controls
-  - [ ] 3.3.3 Add backup and recovery procedures
-  - **Complexity:** High
-  - **Acceptance:** Security audit passed, data protected
+- [x] 3.3 Enhance security and compliance
+  - [x] 3.3.1 Conduct security audit
+  - [x] 3.3.2 Implement data privacy controls
+  - [x] 3.3.3 Add backup and recovery procedures
+  - **Complexity:** Medium
+  - **Acceptance:** Audit report, privacy features active
+
+- [x] 3.4 Remediation: Security and Analytics
+  - [x] 3.4.1 Secure deleteAccount (IDOR fix)
+  - [x] 3.4.2 Enforce soft-delete filtering
+  - [x] 3.4.3 Integrate analytics hooks
+  - [x] 3.4.4 Implement Web Vitals monitoring
+  - **Complexity:** Medium
+  - **Acceptance:** Security holes plugged, analytics data flowingd, data protected
+
+- [x] 3.5 Refinement: Security and Analytics
+  - [x] 3.5.1 Refactor deleteAccount (remove args)
+  - [x] 3.5.2 Optimize user queries (Convex filter)
+  - [x] 3.5.3 Complete analytics integration (LMS, Dashboard)
+  - **Complexity:** Medium
+  - **Acceptance:** Codebase robust, full analytics coverage
 
 ---
 
 ## Priority Matrix & Critical Path
 
 ### MVP Critical Path (Must Complete for Launch):
+
 1. **Phase 0 Foundation** (Tasks 0.1-0.10) - **4 weeks**
 2. **Authentication System** (Tasks 1.1-1.2) - **2 weeks**
 3. **Content Management** (Tasks 1.3-1.5) - **4 weeks**
@@ -371,17 +412,20 @@ Goal: 50 paid users within first year
 **Total MVP Timeline:** 20 weeks (5 months)
 
 ### High Priority (Post-MVP but Important):
+
 - AI Playground (Tasks 1.13)
 - Content Creation Pipeline (Tasks 2.1-2.2)
 - Admin Panel Enhancements (Tasks 2.3)
 - UX Improvements (Tasks 2.4-2.5)
 
 ### Medium Priority (Can be deferred):
+
 - SEO Optimization (Tasks 2.6)
 - Performance Optimization (Tasks 3.1)
 - Analytics Setup (Tasks 3.2)
 
 ### Low Priority (Nice to have):
+
 - Advanced security features (Tasks 3.3)
 - Enhanced admin analytics
 - Advanced engagement features
@@ -389,6 +433,7 @@ Goal: 50 paid users within first year
 ## Risk Assessment & Mitigation
 
 ### High Risk Items:
+
 1. **Xendit Integration Complexity**
    - Mitigation: Start with test mode early, allocate extra time
    - Backup: Manual payment tracking as fallback
@@ -402,6 +447,7 @@ Goal: 50 paid users within first year
    - Backup: Adjust pricing model, add free trial
 
 ### Medium Risk Items:
+
 1. **Technical Complexity of LMS**
    - Mitigation: Use existing libraries, keep simple initially
    - Backup: External video hosting platform
@@ -413,18 +459,21 @@ Goal: 50 paid users within first year
 ## Success Metrics & KPIs
 
 ### Technical Metrics:
+
 - **Build Success Rate:** 95%+
 - **Test Coverage:** 80%+ for critical paths
 - **Page Load Time:** <2 seconds
 - **Uptime:** 99.5%+
 
 ### Business Metrics:
+
 - **User Registration:** 100+ users in first month
 - **Conversion Rate:** 5-10% free to paid
 - **User Engagement:** 50%+ complete first module
 - **Revenue Target:** 50 paid users within 6-12 months
 
 ### Content Metrics:
+
 - **Content Freshness:** 3-5 new articles per week
 - **Course Completion:** 30%+ finish basic course
 - **User Retention:** 40%+ monthly active users
@@ -432,6 +481,7 @@ Goal: 50 paid users within first year
 ## Resource Allocation Recommendations
 
 ### Development Team Structure:
+
 - **Full-Stack Developer (Lead):** Architecture, core features
 - **Frontend Developer:** UI/UX, components, responsive design
 - **Backend Developer:** Integrations, database, API
@@ -439,6 +489,7 @@ Goal: 50 paid users within first year
 - **QA/Testing:** Test coverage, user acceptance testing
 
 ### Time Allocation:
+
 - **Phase 0 (Foundation):** 20% of total time
 - **Phase 1 (MVP Core):** 50% of total time
 - **Phase 2 (Content/UX):** 20% of total time
@@ -447,21 +498,25 @@ Goal: 50 paid users within first year
 ## Launch Strategy
 
 ### Alpha Launch (Week 12):
+
 - Internal team testing
 - Core functionality only
 - Focus on bug fixes
 
 ### Beta Launch (Week 16):
+
 - Limited user testing (20-30 users)
 - Full MVP functionality
 - Collect user feedback
 
 ### Public Launch (Week 20):
+
 - Marketing campaign activation
 - Full feature set available
 - Customer support ready
 
 ### Post-Launch Optimization (Week 20+):
+
 - Performance monitoring
 - User feedback implementation
 - Content pipeline scaling
