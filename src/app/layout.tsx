@@ -4,6 +4,8 @@ import { ClerkProvider } from '@clerk/nextjs'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import { AuthHeader } from '../components/layout/auth-header'
+import { MainNav } from '../components/layout/main-nav'
+import { Container } from '@/components/layout/container'
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -26,6 +28,9 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <html lang='en'>
         <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
           <AuthHeader />
+          <Container>
+            <MainNav />
+          </Container>
           {children}
         </body>
       </html>

@@ -3,7 +3,7 @@ import { clerkMiddleware, createRouteMatcher } from '@clerk/nextjs/server'
 
 const isPublicRoute = createRouteMatcher(['/', '/sign-in(.*)', '/sign-up(.*)'])
 
-export default clerkMiddleware(async (auth, req) => {
+export const proxy = clerkMiddleware(async (auth, req) => {
   const { userId, redirectToSignIn } = await auth()
   if (!isPublicRoute(req) && !userId) {
     return redirectToSignIn({ returnBackUrl: req.url })
@@ -11,5 +11,10 @@ export default clerkMiddleware(async (auth, req) => {
 })
 
 export const config = {
-  matcher: ['/protected(.*)', '/app(.*)', '/admin(.*)', '/((?!_next|.*\..*|favicon.ico).*)'],
+  matcher: [
+    '/((?!.+\\..+|_next).*)',
+    '/',
+    '/(api|trpc)(.*)',
+    '/dashboard(.*)',
+  ],
 }

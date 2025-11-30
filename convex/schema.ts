@@ -67,4 +67,71 @@ export default defineSchema({
     .index('by_isPublished', ['isPublished'])
     .index('by_isPremium', ['isPremium'])
     .index('by_createdBy', ['createdBy']),
+
+  courses: defineTable({
+    title: v.string(),
+    slug: v.string(),
+    description: v.string(),
+    imageUrl: v.optional(v.string()),
+    isPublished: v.boolean(),
+    publishedAt: v.optional(v.number()),
+    createdBy: v.id('users'),
+    tags: v.array(v.string()),
+    deletedAt: v.optional(v.number()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index('by_slug', ['slug'])
+    .index('by_isPublished', ['isPublished'])
+    .index('by_createdBy', ['createdBy']),
+
+  modules: defineTable({
+    courseId: v.id('courses'),
+    title: v.string(),
+    order: v.number(),
+    description: v.optional(v.string()),
+    deletedAt: v.optional(v.number()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index('by_course', ['courseId'])
+    .index('by_order', ['courseId', 'order']),
+
+  lessons: defineTable({
+    moduleId: v.id('modules'),
+    title: v.string(),
+    order: v.number(),
+    content: v.string(),
+    videoUrl: v.optional(v.string()),
+    isPublished: v.boolean(),
+    publishedAt: v.optional(v.number()),
+    deletedAt: v.optional(v.number()),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index('by_module', ['moduleId'])
+    .index('by_order', ['moduleId', 'order'])
+    .index('by_isPublished', ['isPublished']),
+
+  progress: defineTable({
+    userId: v.id('users'),
+    courseId: v.id('courses'),
+    lessonId: v.id('lessons'),
+    completedAt: v.number(),
+  })
+    .index('by_user_course', ['userId', 'courseId'])
+    .index('by_user_lesson', ['userId', 'lessonId']),
+
+  quizzes: defineTable({
+    lessonId: v.id('lessons'),
+    question: v.string(),
+    options: v.array(v.string()),
+    correctIndex: v.number(),
+    explanation: v.optional(v.string()),
+    isPublished: v.boolean(),
+    createdAt: v.number(),
+    updatedAt: v.number(),
+  })
+    .index('by_lesson', ['lessonId'])
+    .index('by_isPublished', ['isPublished']),
 })

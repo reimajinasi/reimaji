@@ -1,0 +1,42 @@
+### Definisi
+Reimaji adalah sebuah aplikasi berbasis web, berfungsi sebagai:
+- Learning Management System Ai/Generative Ai: User, khususnya non teknikal, belajar penggunaan Ai, memahami behavior model, mengetahui risiko serta keterbatasannya, sehingga bisa menggunakan ai secara bijak serta tepat.
+- Media berita terbaru dari perkembangan teknologi Ai
+- Ulasan perkembangan riset. 
+
+### Karakter konten:
+
+1. News:
+- Berbentuk ringkasan-ringkasan yang berisi "inti kabar" 1 paragraf, seperti postingan media sosial "X" dengan "more"
+- List product terbaru: fungsi, spesialisasi, kekuatan, kelemahan
+- Rekomendasi produk unggulan
+
+2. Research
+- Berbentuk ringkasan-ringkasan paper riset terbary 1 paragraf, seperti postingan media sosial "X" dengan "more"
+- Prediksi masa depan
+
+3. LMS:
+- Video presentasi pengajaran
+- Silabus: generative ai multimodal -- text, image (scaling to video, audio, coding) 
+- Playground praktik penggunaan
+- Tingkat perkembangan pembelajaran: Dasar, Menengah, Mahir
+- Penilaian dan Sertifikasi
+
+
+### Potensi Pendapatan
+- Iklan produk
+- Subscribe pelatihan
+
+### Techno stack
+- Frontend: NextJs 16 (https://nextjs.org/docs)
+- Backend: Convex (https://docs.convex.dev/home)
+- Ai: Vercel AISDK with Ai elements (https://ai-sdk.dev/docs/introduction)
+- Ui: Shadcn-ui (https://ui.shadcn.com/docs)
+- Styling: Tailwind
+- Auth: 
+* Clerk (https://clerk.com/docs)
+* Better Auth (https://www.better-auth.com/docs/introduction)
+- Payment: (https://docs.xendit.co/)
+- CMS: ?
+- Deployment: Vercel
+- Email: Resend (https://resend.com/docs/introduction)

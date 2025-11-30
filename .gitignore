@@ -4,16 +4,10 @@ node_modules/
 *.log
 
 .env*
+.env.local
 !.env.example
-knowledge-base/env.txt
 .claude/
 .trae/
-agent-os/
-knowledge-base/
-AGENTS.md
-onboarding.md
-CLAUDE.md
-README-DEVELOPMENT.md
 
 # TS build info
 tsconfig.tsbuildinfo
@@ -24,3 +18,4 @@ test-results/
 
 # Convex build output
 convex/.temp/
+convex/_generated/

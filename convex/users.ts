@@ -1,5 +1,6 @@
 import { query, mutation } from './_generated/server'
 import { v } from 'convex/values'
+import { ensureRole } from './permissions'
 
 export const create = mutation({
   args: {
@@ -83,5 +84,33 @@ export const upsertFromClerk = mutation({
       updatedAt: now,
     })
     return id
+  },
+})
+
+export const listAll = query({
+  args: { clerkUserId: v.string() },
+  handler: async (ctx, args) => {
+    await ensureRole(ctx, args.clerkUserId, ['admin', 'superadmin'])
+    const users = await ctx.db.query('users').collect()
+    return users
+  },
+})
+
+export const updateRole = mutation({
+  args: {
+    clerkUserId: v.string(),
+    targetUserId: v.id('users'),
+    role: v.union(
+      v.literal('guest'),
+      v.literal('free'),
+      v.literal('pro'),
+      v.literal('admin'),
+      v.literal('superadmin')
+    ),
+  },
+  handler: async (ctx, args) => {
+    await ensureRole(ctx, args.clerkUserId, ['admin', 'superadmin'])
+    await ctx.db.patch(args.targetUserId, { role: args.role, updatedAt: Date.now() })
+    return args.targetUserId
   },
 })

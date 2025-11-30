@@ -4,19 +4,32 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:backend": "npx convex dev",
+    "dev:setup": "bash -c 'npx convex dev & npm run dev'",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
     "type-check": "tsc --noEmit",
+    "lint:fix": "eslint --fix",
+    "format:check": "prettier --check .",
     "format": "prettier --write .",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test:xendit": "bash scripts/test-xendit.sh",
+    "test:resend": "bash scripts/test-resend.sh",
+    "test:integrations": "bash scripts/test-xendit.sh && bash scripts/test-resend.sh"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.35.5",
+    "@openrouter/ai-sdk-provider": "^1.2.8",
+    "ai": "^5.0.104",
+    "clsx": "^2.1.1",
     "convex": "^1.29.3",
     "next": "16.0.5",
     "react": "19.2.0",
-    "react-dom": "19.2.0"
+    "react-dom": "19.2.0",
+    "resend": "^6.5.2",
+    "tailwind-merge": "^3.4.0",
+    "xendit-node": "^7.0.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.57.0",
