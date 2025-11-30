@@ -1,6 +1,7 @@
 import { query, mutation } from './_generated/server'
 import { v } from 'convex/values'
 import { ensureRole, getUserByClerkId } from './permissions'
+import sanitizeHtml from 'sanitize-html'
 
 export const list = query({
   args: {
@@ -78,8 +79,8 @@ export const create = mutation({
     const id = await ctx.db.insert('news', {
       title: args.title,
       slug,
-      summary: args.summary,
-      content: args.content,
+      summary: sanitizeHtml(args.summary),
+      content: sanitizeHtml(args.content),
       type: args.type,
       tags: args.tags,
       sourceUrl: args.sourceUrl,
@@ -116,8 +117,8 @@ export const update = mutation({
     await ensureRole(ctx, args.clerkUserId, ['admin', 'superadmin'])
     const patch: Record<string, unknown> = { updatedAt: Date.now() }
     if (args.title) patch.title = args.title
-    if (args.summary) patch.summary = args.summary
-    if (args.content) patch.content = args.content
+    if (args.summary) patch.summary = sanitizeHtml(args.summary)
+    if (args.content) patch.content = sanitizeHtml(args.content)
     if (args.type) patch.type = args.type
     if (args.tags) patch.tags = args.tags
     if (args.sourceUrl) patch.sourceUrl = args.sourceUrl
@@ -138,5 +139,27 @@ export const remove = mutation({
     await ensureRole(ctx, args.clerkUserId, ['admin', 'superadmin'])
     await ctx.db.patch(args.id, { deletedAt: Date.now(), isPublished: false })
     return args.id
+  },
+})
+
+export const stats = query({
+  args: { clerkUserId: v.string(), limitTop: v.optional(v.number()) },
+  handler: async (ctx, args) => {
+    await ensureRole(ctx, args.clerkUserId, ['admin', 'superadmin'])
+    const items = await ctx.db.query('news').collect()
+    const valid = items.filter(n => !n.deletedAt)
+    const totalPublished = valid.filter(n => n.isPublished).length
+    const totalDraft = valid.length - totalPublished
+    const tagFreq: Record<string, number> = {}
+    for (const n of valid) for (const t of n.tags || []) tagFreq[t] = (tagFreq[t] ?? 0) + 1
+    const topTags = Object.entries(tagFreq)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, (args.limitTop ?? 5))
+      .map(([tag, count]) => ({ tag, count }))
+    const topByViews = [...valid]
+      .sort((a, b) => (b.viewCount ?? 0) - (a.viewCount ?? 0))
+      .slice(0, (args.limitTop ?? 5))
+      .map(n => ({ id: n._id, title: n.title, viewCount: n.viewCount }))
+    return { totalPublished, totalDraft, topTags, topByViews }
   },
 })

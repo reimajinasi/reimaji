@@ -134,4 +134,36 @@ export default defineSchema({
   })
     .index('by_lesson', ['lessonId'])
     .index('by_isPublished', ['isPublished']),
+
+  bookmarks: defineTable({
+    userId: v.id('users'),
+    kind: v.union(v.literal('news'), v.literal('research'), v.literal('lesson')),
+    entityId: v.string(),
+    createdAt: v.number(),
+  })
+    .index('by_user', ['userId'])
+    .index('by_entity', ['entityId']),
+
+  onboarding: defineTable({
+    userId: v.id('users'),
+    steps: v.optional(v.object({ news: v.optional(v.boolean()), research: v.optional(v.boolean()), lms: v.optional(v.boolean()) })),
+    updatedAt: v.number(),
+  })
+    .index('by_user', ['userId']),
+
+  badges: defineTable({
+    key: v.string(),
+    title: v.string(),
+    description: v.string(),
+    createdAt: v.number(),
+  })
+    .index('by_key', ['key']),
+
+  user_badges: defineTable({
+    userId: v.id('users'),
+    badgeId: v.id('badges'),
+    createdAt: v.number(),
+  })
+    .index('by_user', ['userId'])
+    .index('by_badge', ['badgeId']),
 })

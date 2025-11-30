@@ -7,6 +7,7 @@ import { PageHeader } from '@/components/layout/page-header'
 import { Section } from '@/components/layout/section'
 import { ContentCard } from '@/components/layout/content-card'
 import type { Id, Doc } from '../../../../../convex/_generated/dataModel'
+import { ShareProgress } from '@/components/features/share-progress'
 
 export default async function Page({ params }: { params: { course: string } }) {
   const { userId } = await auth()
@@ -21,6 +22,7 @@ export default async function Page({ params }: { params: { course: string } }) {
         title={course.title}
         description={course.description}
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'LMS', href: '/lms' }, { label: course.title }]}
+        actions={<ShareProgress courseId={course._id as Id<'courses'>} courseTitle={course.title} />}
       />
       <Section>
         <ContentCard title="Navigasi Kursus" description={`Progres: ${progress.percent}% (${progress.completed}/${progress.total})`}>

@@ -6,6 +6,9 @@ import { api } from '../../../../../convex/_generated/api'
 import { PageHeader } from '@/components/layout/page-header'
 import { Section } from '@/components/layout/section'
 import { ContentCard } from '@/components/layout/content-card'
+import { BookmarkButton } from '@/components/features/bookmark-button'
+import React from 'react'
+import sanitizeHtml from 'sanitize-html'
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const { userId } = await auth()
@@ -26,20 +29,36 @@ export default async function Page({ params }: { params: { slug: string } }) {
         title={item.title}
         description={item.summary}
         breadcrumbs={[{ label: 'Home', href: '/' }, { label: 'News', href: '/news' }, { label: item.title }]}
+        actions={<BookmarkButton kind='news' entityId={item._id as string} />}
       />
       <Section>
         <ContentCard title="Konten" description={canAccess ? 'Konten lengkap' : 'Konten terkunci untuk pengguna Premium'}>
           {canAccess ? (
-            <div className="prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: item.content }} />
+            <div className="prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: sanitizeHtml(item.content) }} />
           ) : (
             <div className="space-y-3">
               <div className="rounded border border-border p-4 text-sm">Konten premium. Silakan upgrade ke Pro untuk akses penuh.</div>
               <div className="text-sm text-muted-foreground">Ringkasan:</div>
-              <div className="prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: item.summary }} />
+              <div className="prose prose-sm max-w-none" dangerouslySetInnerHTML={{ __html: sanitizeHtml(item.summary) }} />
             </div>
           )}
         </ContentCard>
       </Section>
+      <script
+        type="application/ld+json"
+        suppressHydrationWarning
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'NewsArticle',
+            headline: item.title,
+            description: item.summary,
+            datePublished: item.publishedAt ? new Date(item.publishedAt).toISOString() : undefined,
+            isAccessibleForFree: !item.isPremium,
+            url: `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/news/${item.slug}`,
+          }),
+        }}
+      />
     </div>
   )
 }

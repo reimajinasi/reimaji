@@ -150,14 +150,56 @@
   - Risiko/Follow-up: Tambah editor soal di admin.
 
 - [x] [2025-11-30] Step: 1.9 Implement certificate system
-  - Hasil: Halaman `/lms/[course]/certificate` siap cetak PDF (print-to-PDF); gating progres dapat ditambahkan kemudian.
-  - Bukti: `type-check`, `lint`, `build` OK; route certificate terdeteksi.
-  - Risiko/Follow-up: Tambah validasi progres penuh sebelum akses sertifikat.
+153→  - Hasil: Halaman `/lms/[course]/certificate` siap cetak PDF (print-to-PDF); gating progres dapat ditambahkan kemudian.
+154→  - Bukti: `type-check`, `lint`, `build` OK; route certificate terdeteksi.
+155→  - Risiko/Follow-up: Tambah validasi progres penuh sebelum akses sertifikat.
+
+- [x] [2025-11-30] Step: 1.14 Create Landing Page
+  - Hasil: Landing difokuskan pada Berita, Review Produk & Unggulan, dan Riset terbaru; hero dengan value prop dan CTA `Daftar`; LMS ditampilkan sebagai teaser ke halaman khusus.
+  - Bukti: `src/app/page.tsx` diperbarui; komponen `NewsSummaries`, `ProductReviews`, `ResearchSummaries` ditambahkan; E2E test `tests-e2e/landing.spec.ts` tersedia.
+  - Risiko/Follow-up: Hubungkan data produk ke sumber dinamis; tambah pagination untuk feed panjang.
 
 - [x] [2025-11-29] Task 1.1: Complete User Authentication Flow
   - Hasil: Dokumen implementasi lengkap dibuat (`implementation/1.1-complete-user-authentication-flow.md`) mencakup registration, email verification, dashboard, profile management, dan password reset. Include acceptance criteria, langkah implementasi, testing strategy, dan risk mitigation.
   - Risiko/Follow-up: Implementasi kode perlu segera dilakukan; pastikan Clerk webhook untuk email verification diconfigurasi dengan benar; test payment integration untuk Pro features.
 
-- [x] [2025-11-29] Task 1.2: Implement User Role Management
+ - [x] [2025-11-29] Task 1.2: Implement User Role Management
   - Hasil: Dokumen implementasi lengkap dibuat (`implementation/1.2-implement-user-role-management.md`) mencakup admin panel, role upgrade flow, session management, dan security measures. Include RBAC architecture, Xendit integration, dan comprehensive testing plan.
   - Risiko/Follow-up: Implementasi Convex schema update untuk roles dan sessions; pastikan admin role checking di semua admin routes; test subscription webhook dari Xendit.
+
+- [x] [2025-11-30] Step: 0.11 Set up testing framework
+  - Hasil: Jest + Testing Library dikonfigurasi; `jest.config.ts` dan `jest.setup.ts` dibuat; contoh test untuk `Button` lulus; util testing Convex dan seeds data ditambahkan; Playwright dikonfigurasi dengan tes E2E dasar untuk halaman Home.
+  - Bukti: `npm run test` lulus; struktur test tersedia; file `tests/convex-test-utils.ts`, `tests/seeds.ts`, `playwright.config.ts`, `tests-e2e/basic.spec.ts` dibuat.
+  - Risiko/Follow-up: Perluasan cakupan test untuk fitur News/Research/LMS.
+
+- [x] [2025-11-30] Step: 0.12 Configure CI/CD pipeline
+  - Hasil: Workflow CI (`ci.yml`) untuk lint, type-check, build, dan test ditambahkan; workflow deploy Vercel (`deploy.yml`) dibuat bersyarat secrets.
+  - Bukti: Pipeline siap berjalan pada push/PR ke `main`; deploy otomatis aktif saat secrets diisi.
+178→  - Risiko/Follow-up: Isi secrets Vercel di repository settings agar deploy otomatis aktif.
+
+- [x] [2025-11-30] Step: 2.1 Establish content creation workflow
+  - Hasil: Template konten News/Research ditambahkan; halaman admin Workflow untuk publish/unpublish dibuat dan terintegrasi RBAC via Clerk.
+  - Bukti: `src/lib/content/templates.ts`, `src/app/admin/workflow/page.tsx`, `src/app/admin/workflow/workflow-controls.tsx`.
+  - Risiko/Follow-up: Tambah status review granular dan audit trail bila perlu.
+
+- [x] [2025-11-30] Step: 2.2 Create initial content library
+  - Hasil: Halaman admin Seed menambahkan 20+ News, 15+ Research, dan 1 course (4 modul, 2 lesson/modul) melalui tombol Seed.
+  - Bukti: `src/app/admin/seed/seeds.ts`, `src/app/admin/seed/page.tsx`, `src/app/admin/seed/seed/run.tsx`.
+  - Risiko/Follow-up: Tambah validasi duplikasi dan pengisian sumber dinamis untuk produk unggulan.
+- [x] [2025-11-30] Step: 2.3 Enhance admin functionality
+  - Hasil: Content Analytics (`admin/analytics`) menampilkan stats News/Research dan distribusi role; User Engagement (`admin/engagement`) menampilkan aktivitas LMS per course; Bulk Ops (`admin/bulk`) untuk publish/unpublish/remove massal.
+  - Bukti: Convex queries `news.stats`, `research.stats`, `users.roleStats`, `progress.courseStats`; halaman admin terkait dibuat.
+  - Risiko/Follow-up: Tambahkan pagination dan grafik tren untuk analitik lanjutan.
+- [x] [2025-11-30] Step: 2.4 Optimize user experience
+  - Hasil: Tambah loading & error global; perbaikan responsif pada halaman admin dan landing; halaman badges ditambahkan sebagai bagian pengalaman.
+  - Bukti: `src/app/loading.tsx`, `src/app/error.tsx`, `src/app/(app)/badges/page.tsx`.
+  - Risiko/Follow-up: Detail onboarding akan diperkaya saat konten final.
+
+- [x] [2025-11-30] Step: 2.5 Add engagement features
+  - Hasil: Bookmarking pada News/Research; berbagi progres kursus; sistem badges saat menyelesaikan course.
+  - Bukti: `convex/bookmarks.ts`, `src/components/features/bookmark-button.tsx`, `src/components/features/share-progress.tsx`, `convex/achievements.ts`, update `convex/progress.ts` awarding badge.
+  - Risiko/Follow-up: Tambah tampilan badge di profile dan pengelolaan bookmark massal.
+- [x] [2025-11-30] Step: 2.6 Implement SEO optimization
+  - Hasil: Meta tags lengkap (Open Graph, Twitter), JSON-LD di Home/News/Research, robots dan sitemap aktif.
+  - Bukti: `src/app/layout.tsx`, `src/app/robots.ts`, `src/app/sitemap.ts`, `public/robots.txt`, update JSON-LD di halaman.
+  - Risiko/Follow-up: Tambah og:image dan canonical per halaman saat konten final.

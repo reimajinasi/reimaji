@@ -1,6 +1,7 @@
 "use client"
 import Link from 'next/link'
-import { SignedIn, SignedOut, UserButton, SignInButton, SignOutButton } from '@clerk/nextjs'
+import { SignedIn, SignedOut, SignInButton } from '@clerk/nextjs'
+import { UserMenu } from './user-menu'
 
 export function AuthHeader() {
   return (
@@ -12,8 +13,7 @@ export function AuthHeader() {
             <SignInButton />
           </SignedOut>
           <SignedIn>
-            <UserButton />
-            <SignOutButton />
+            <UserMenu />
           </SignedIn>
         </div>
       </div>

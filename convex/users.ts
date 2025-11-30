@@ -114,3 +114,15 @@ export const updateRole = mutation({
     return args.targetUserId
   },
 })
+
+export const roleStats = query({
+  args: { clerkUserId: v.string() },
+  handler: async (ctx, args) => {
+    await ensureRole(ctx, args.clerkUserId, ['admin', 'superadmin'])
+    const users = await ctx.db.query('users').collect()
+    const counts: Record<string, number> = { guest: 0, free: 0, pro: 0, admin: 0, superadmin: 0 }
+    for (const u of users) counts[u.role] = (counts[u.role] ?? 0) + 1
+    const total = users.length
+    return { total, counts }
+  },
+})
