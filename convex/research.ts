@@ -52,6 +52,15 @@ export const getBySlug = query({
   },
 })
 
+export const getById = query({
+  args: { id: v.id('research') },
+  handler: async (ctx, args) => {
+    const item = await ctx.db.get(args.id)
+    if (!item || item.deletedAt) return null
+    return item
+  },
+})
+
 export const create = mutation({
   args: {
     clerkUserId: v.string(),

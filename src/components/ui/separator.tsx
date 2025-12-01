@@ -1,6 +1,19 @@
 import * as React from 'react'
 import { cn } from '@/lib/utils'
 
-export function Separator({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
-  return <div className={cn('h-px w-full bg-border', className)} {...props} />
+interface SeparatorProps extends React.HTMLAttributes<HTMLDivElement> {
+  orientation?: 'horizontal' | 'vertical'
+}
+
+export function Separator({ className, orientation = 'horizontal', ...props }: SeparatorProps) {
+  return (
+    <div
+      className={cn(
+        'bg-border',
+        orientation === 'horizontal' ? 'h-px w-full' : 'h-full w-px',
+        className
+      )}
+      {...props}
+    />
+  )
 }

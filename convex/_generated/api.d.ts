@@ -12,6 +12,7 @@ import type * as achievements from "../achievements.js";
 import type * as analytics from "../analytics.js";
 import type * as bookmarks from "../bookmarks.js";
 import type * as courses from "../courses.js";
+import type * as files from "../files.js";
 import type * as lessons from "../lessons.js";
 import type * as modules from "../modules.js";
 import type * as news from "../news.js";
@@ -33,6 +34,7 @@ declare const fullApi: ApiFromModules<{
   analytics: typeof analytics;
   bookmarks: typeof bookmarks;
   courses: typeof courses;
+  files: typeof files;
   lessons: typeof lessons;
   modules: typeof modules;
   news: typeof news;
